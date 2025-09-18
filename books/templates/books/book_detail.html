@@ -1,0 +1,22 @@
+{% extends "books/books_base.html" %}
+{% load static %}
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="book-detail-container">
+    <div>
+        {% if book.image %}
+        <img src="{{ book.image.url }}" alt="{{ book.title }}">
+        {% else %}
+        <img src="{% static 'images/default_book.png' %}" alt="No Image">
+        {% endif %}
+    </div>
+    <div class="book-info">
+        <h1>{{ book.title }}</h1>
+        <h3>{{ book.author }}</h3>
+        <div class="price">${{ book.price }}</div>
+        <p>{{ book.description|linebreaks }}</p>
+    </div>
+</div>
+
+{% endblock %}
