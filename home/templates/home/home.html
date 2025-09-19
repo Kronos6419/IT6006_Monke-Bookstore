@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home - Monke Bookstore{% endblock %}
+
+{# We link BOTH: your global static.css (header/footer) and the new home.css #}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/static.css' %}">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="homepage">
+
+    <!-- Hero / Banner -->
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>Find your next great read</h1>
+            <p>Featured picks, best sellers, and great discounts all in one place.</p>
+            <a class="btn" href="{% url 'book_list' %}">Browse All Books</a>
+        </div>
+    </section>
+
+    <!-- Featured (blue block) -->
+    <section class="section-block">
+        <div class="section-head center-title">
+            <h2>Featured</h2>
+        </div>
+        <div class="book-grid">
+            {% for book in featured_books %}
+                <a class="book-card" href="{% url 'book_detail' book.id %}">
+                    <div class="book-thumb">
+                        {% if book.image %}
+                            <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                        {% else %}
+                            <img src="{% static 'images/placeholder.png' %}" alt="No image">
+                        {% endif %}
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">{{ book.title }}</h3>
+                        <p class="book-meta">by {{ book.author }}</p>
+                        <p class="book-price">${{ book.price }}</p>
+                    </div>
+                </a>
+            {% empty %}
+                <p class="empty-msg">No featured books available.</p>
+            {% endfor %}
+        </div>
+        <div class="section-cta">
+            <a class="link-more on-blue" href="{% url 'book_list' %}">See all</a>
+        </div>
+    </section>
+
+    <!-- Best Sellers (blue block) -->
+    <section class="section-block">
+        <div class="section-head center-title">
+            <h2>Best Sellers</h2>
+        </div>
+        <div class="book-grid">
+            {% for book in best_sellers %}
+                <a class="book-card" href="{% url 'book_detail' book.id %}">
+                    <div class="book-thumb">
+                        {% if book.image %}
+                            <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                        {% else %}
+                            <img src="{% static 'images/placeholder.png' %}" alt="No image">
+                        {% endif %}
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">{{ book.title }}</h3>
+                        <p class="book-meta">by {{ book.author }}</p>
+                        <p class="book-price">${{ book.price }}</p>
+                    </div>
+                </a>
+            {% empty %}
+                <p class="empty-msg">No best sellers available.</p>
+            {% endfor %}
+        </div>
+        <div class="section-cta">
+            <a class="link-more on-blue" href="{% url 'book_list' %}">See all</a>
+        </div>
+    </section>
+
+    <!-- Discounts (blue block) -->
+    <section class="section-block">
+        <div class="section-head center-title">
+            <h2>Discounts</h2>
+        </div>
+        <div class="book-grid">
+            {% for book in discounted_books %}
+                <a class="book-card" href="{% url 'book_detail' book.id %}">
+                    <div class="book-thumb">
+                        {% if book.image %}
+                            <img src="{{ book.image.url }}" alt="{{ book.title }}">
+                        {% else %}
+                            <img src="{% static 'images/placeholder.png' %}" alt="No image">
+                        {% endif %}
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">{{ book.title }}</h3>
+                        <p class="book-meta">by {{ book.author }}</p>
+                        <p class="book-price">${{ book.price }}</p>
+                    </div>
+                </a>
+            {% empty %}
+                <p class="empty-msg">No discounted books available.</p>
+            {% endfor %}
+        </div>
+        <div class="section-cta">
+            <a class="link-more on-blue" href="{% url 'book_list' %}">See all</a>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

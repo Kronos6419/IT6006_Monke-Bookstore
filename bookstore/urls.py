@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from books import views as book_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', book_views.home, name='home'),
     path('accounts/', include('accounts.urls')),
-    path("books/", include("books.urls"))
+    path("books/", include("books.urls")),
+    path("", include("home.urls")), 
     ]
 
 if settings.DEBUG:
