@@ -2,14 +2,13 @@
 {% block content %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Incorrect username or password.</p>
 {% endif %}
 
 {% if next %}
 {% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
+<p>You are already logged in.</p>
 {% else % }
-
 <p>Please login to see this page.</p>
 {% endif %}
 
@@ -17,7 +16,7 @@
 
 
 <h1>Welcome to Monke Bookstore</h1>
-<h3>Sign up with our Bookstore</h3>
+<h3>Sign in with our Bookstore</h3>
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -26,11 +25,14 @@
         {{ field }}
     </div>
     {% endfor %}
-    <button type="submit">Log in</button>
+    <button type="submit" style="background-color: #0077cc; border-style: none; color: white; border-radius: 10px; width: 20%; height: 40px; font-size: 18px;">Log in</button>
     <input type ='hidden' name="next" value="{{next}}">
 </form>
-    <a href="{% url 'register' %}">
-        <p>Register</p>
-    </a>
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
+        <p>Don't have an account?</p>
+        <a href="{% url 'register' %}">
+            <p>Register -></p>
+        </a>
+    </div>
 {% endblock %}
 

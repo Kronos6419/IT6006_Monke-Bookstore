@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Monke Bookstore{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/static.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>Monke Bookstore</h1>
+
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <a class="nav-link-logout" href="#" onclick="this.closest('form').submit(); return false">Logout</a>
+                </form>
+            {% else %}
+                    <a class="nav-link-login" href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+        <nav class="navBar">
+            <ul class="navBarList">
+                <li><a href="{% url 'book_list' %}">Home</a></li>
+                <li><a href="{% url 'book_list' %}">Books</a></li>
+                <li><a href="{% url 'book_list' %}">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-section about">
+                <h4>About Us</h4>
+                <p>Monke Bookstore is your one-stop shop for all your favorite books. Discover new stories and timeless classics!</p>
+            </div>
+
+            <div class="footer-section socials">
+                <h4>Socials</h4>
+                <ul class="social-links">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h4>Contact Information</h4>
+                <p>Email: info@monkebookstore.com</p>
+                <p>Phone: +64 123 4567</p>
+                <p>Address: Auckland, New Zealand</p>
+            </div>
+        </div>
+
+        <hr class="footer-divider">
+
+        <div class="footer-bottom">
+            <ul class="footer-links">
+                <li><a href="#">Terms</a></li>
+                <p>&copy; 2025 Monke Bookstore</p>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>
