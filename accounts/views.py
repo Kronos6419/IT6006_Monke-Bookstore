@@ -1,4 +1,5 @@
 from django.views.generic import CreateView
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from .forms import SignUpForm
 from .models import Profile
@@ -23,4 +24,6 @@ class RegisterView(CreateView):
         )
         
         return super().form_valid(form)
+
+
 

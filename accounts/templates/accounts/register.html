@@ -1,5 +1,21 @@
 {% extends "accounts/base_auth.html" %}
 {% block content %}
+
+{% if form.errors %}
+    <div class="error">
+        <p>Please fix the following errors:</p>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
 <h1>Welcome to Monke Bookstore</h1>
 <h3>Sign up with our Bookstore</h3>
 <form method="post">
@@ -11,10 +27,15 @@
         {{ field }}
     </div>
     {% endfor %}
-    <button type="submit">Register</button>
+    <p style="text-align: center;">By signing up, you agree to our Terms of Use and Privacy Policy.</p>    
+    <button type="submit" style="background-color: #0077cc; border-style: none; color: white; border-radius: 10px; width: 20%; height: 40px; font-size: 18px;">Register</button>
 </form>
-    <a href="{% url 'login' %}">
-        <p>Log in</p>
-    </a>
+    <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
+        <p>Already have an account?</p>
+        <a href="{% url 'login' %}">
+            <p>Log in -></p>
+        </a>
+    </div>
+
 {% endblock %}
 

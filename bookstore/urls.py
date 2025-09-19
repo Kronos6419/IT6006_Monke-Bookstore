@@ -22,10 +22,10 @@ from books import views as book_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', book_views.home, name='home'),
+    path('', book_views.home, name='home.urls'),
     path('accounts/', include('accounts.urls')),
     path("books/", include("books.urls")),
-    path("", include("home.urls")), 
+    path("cart/", include("cart.urls")),
     ]
 
 if settings.DEBUG:

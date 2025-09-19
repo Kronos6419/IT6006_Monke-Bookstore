@@ -16,6 +16,10 @@
         <h3>{{ book.author }}</h3>
         <div class="price">${{ book.price }}</div>
         <p>{{ book.description|linebreaks }}</p>
+        <form method="post" action="{% url 'add_to_cart' book.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Add to Cart</button>
+</form>
     </div>
 </div>
 

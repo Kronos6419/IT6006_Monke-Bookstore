@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+    <style>
+        body {
+                font-family: Arial, sans-serif;
+                background: #f4f4f4;
+                margin: 20px;
+                padding: 0;
+            }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+        img {
+            max-height: 150px;
+        }
+        input {
+            width: 40px;
+        }
+        .total {
+            text-align: right;
+            margin-right: 15%;
+            font-weight: bold;
+        }
+        .actions button {
+            padding: 5px 10px;
+        }
+        .place-order {
+            display: block;
+            width: 140px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #0077cc;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            margin-right: 13.33%;
+            font-weight: 'bold'
+        }
+        .place-order:hover {
+            background: #005fa3;
+        }
+        button {
+            background-color: #0077cc;
+            color: white;
+            border-radius: 7px;
+            border: none;
+            padding: 5px;
+        }
+        button:hover {
+            background: #005fa3;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">Your Cart</h2>
+
+    <table>
+        <tr>
+            <th></th>
+            <th>Book</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+            <th></th>
+        </tr>
+        {% if cart_items %}
+            {% for item in cart_items %}
+            <tr>
+                <td>
+                    {% if item.book.image %}
+                        <img src="{{ item.book.image.url }}" alt="{{ item.book.title }}">
+                    {% else %}
+                        Image Failed To Load
+                    {% endif %}
+                </td>
+                <td>{{ item.book.title }}</td>
+                <td>
+                    <form method="post" action="{% url 'update_cart_item' item.id %}">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="0">
+                        <button type="submit">Update</button>
+                    </form>
+                </td>
+                <td>${{ item.subtotal }}</td>
+                <td class="actions">
+                    <form method="post" action="{% url 'update_cart_item' item.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="quantity" value="0">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5">Your cart is empty.</td>
+            </tr>
+        {% endif %}
+    </table>
+    <div class="total">
+        Total: ${{ total_amount|default:"00.00" }}
+    </div>
+    <a class="place-order" href="{% url 'place_order' %}">Place Order</a>
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            alert("{{ message }}");
+        {% endfor %}
+    </script>
+    {% endif %}
+</body>
+</html>
