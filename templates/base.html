@@ -19,9 +19,10 @@
                     <a class="nav-link-logout" href="#" onclick="this.closest('form').submit(); return false">Logout</a>
                 </form>
             {% else %}
-                    <a class="nav-link-login" href="{% url 'login' %}">Login</a>
+                <a class="nav-link-login" href="{% url 'login' %}">Login</a>
             {% endif %}
         </div>
+
         <nav class="navBar">
             <ul class="navBarList">
                 <li><a href="{% url 'home' %}">Home</a></li>
@@ -64,9 +65,9 @@
         <div class="footer-bottom">
             <ul class="footer-links">
                 <li><a href="#">Terms</a></li>
-                <p>&copy; 2025 Monke Bookstore</p>
                 <li><a href="#">Privacy Policy</a></li>
             </ul>
+            <p class="copyright">&copy; 2025 Monke Bookstore</p>
         </div>
     </footer>
 </body>

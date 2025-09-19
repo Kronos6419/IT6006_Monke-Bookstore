@@ -1,11 +1,9 @@
-
 {% extends "base.html" %}
 {% load static %}
 
 {% block title %}Cart - Monke Bookstore{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/static.css' %}">
 <link rel="stylesheet" href="{% static 'css/cart.css' %}">
 {% endblock %}
 
@@ -14,8 +12,8 @@
 
     <table>
         <tr>
-            <th></th>
-            <th>Book</th>
+            <th>Image</th>
+            <th>Book Name</th>
             <th>Quantity</th>
             <th>Subtotal</th>
             <th></th>
@@ -59,10 +57,10 @@
     </div>
     <a class="place-order" href="{% url 'place_order' %}">Place Order</a>
     {% if messages %}
-    <script>
         {% for message in messages %}
-            alert("{{ message }}");
+            <script>
+                alert("{{ message|escapejs }}");
+            </script>
         {% endfor %}
-    </script>
     {% endif %}
 {% endblock %}

@@ -3,25 +3,22 @@
 
 {% block title %}Home - Monke Bookstore{% endblock %}
 
-{# We link BOTH: your global static.css (header/footer) and the new home.css #}
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/static.css' %}">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="homepage">
 
-    <!-- Hero / Banner -->
     <section class="hero">
         <div class="hero-inner">
-            <h1>Find your next great read</h1>
-            <p>Featured picks, best sellers, and great discounts all in one place.</p>
+            <h2>Welcome to Monke Bookstore</h2>
+            <p>Discover featured picks, best sellers, and great discounts.</p>
             <a class="btn" href="{% url 'book_list' %}">Browse All Books</a>
         </div>
     </section>
 
-    <!-- Featured (blue block) -->
+    <!-- Featured -->
     <section class="section-block">
         <div class="section-head center-title">
             <h2>Featured</h2>
@@ -51,7 +48,7 @@
         </div>
     </section>
 
-    <!-- Best Sellers (blue block) -->
+    <!-- Best Sellers -->
     <section class="section-block">
         <div class="section-head center-title">
             <h2>Best Sellers</h2>
@@ -81,13 +78,13 @@
         </div>
     </section>
 
-    <!-- Discounts (blue block) -->
+    <!-- Discounts -->
     <section class="section-block">
         <div class="section-head center-title">
             <h2>Discounts</h2>
         </div>
         <div class="book-grid">
-            {% for book in discounted_books %}
+            {% for book in discounts %}
                 <a class="book-card" href="{% url 'book_detail' book.id %}">
                     <div class="book-thumb">
                         {% if book.image %}
